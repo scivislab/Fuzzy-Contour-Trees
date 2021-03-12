@@ -1,0 +1,172 @@
+@import "/includes/bootstrap/bootstrap.min.css";
+@import "/includes/bootstrap/bootstrap-slider.min.css";
+@import "/includes/accordion/accordion.css";
+
+ @media screen {
+     @page {
+         margin: 0;
+         size: 200px 400px;
+     }
+ }
+
+ @media print {
+	@page {
+		margin: 0;
+		size: 1280px 400px;
+	}
+}
+
+html, body {
+	width: 100%;
+}
+.main.container-fluid {
+	padding-top: 20px;
+}
+.left.container-fluid {
+	height: 95vh;
+}
+/*
+#infopanel {
+	width: 100%;
+	float: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+}
+
+#picturepanel {
+	width: 33%;
+	float: right;
+}*/
+
+#alignInput {
+	display: inline-block;
+	float: left;
+	margin-right: 20px;
+}
+
+input[type="radio"] {
+	margin-right: 5px;
+}
+
+#draw_area, .draw {
+	height: 95%;
+}
+
+.downlight {
+	fill: #B8B8B8 !important;
+}
+
+.downlight_edge {
+	stroke: #7f8593 !important;
+}
+
+.tree_rect_downlight {
+	fill: #DDDDDD;
+}
+
+/*.tree_rect_highlight {*/
+	/*fill: #0B62A4;*/
+/*}*/
+
+.tree_rect_selected {
+	stroke-width: 2;
+	stroke: #FF9201;
+}
+
+.tree_text_highlight {
+	fill: "black";
+}
+
+.tree_text_downlight {
+	fill: #B8B8B8;
+}
+
+.highlight_separate_tree {
+	stroke-width: 4 !important;
+	opacity: 1 !important;
+}
+
+#weights_slider {
+	margin-bottom: 40px;
+}
+
+#weights_slider .slider-track-high {
+	background: #FF9201;
+}
+
+#weights_slider .slider-selection {
+	background: #0B62A4;
+}
+
+.slider.slider-horizontal .slider-selection, .slider.slider-horizontal .slider-track-low, .slider.slider-horizontal .slider-track-high {
+    height: 30px;
+}
+
+.slider-handle.round {
+    border-radius: 20%;
+}
+
+.slider-handle {
+    width: 10px;
+    height: 40px;
+}
+
+.slider-text {
+	position: relative;
+	color: white;
+	overflow: auto;
+}
+
+.slider-text p {
+	overflow: hidden;
+	text-overflow: clip;
+	width: 50%;
+}
+
+.slider-text p:first-child {
+	float: left;
+	padding: 3px 0 0 10px;
+	text-align: left;
+}
+
+.slider-text p:last-child {
+	float: right;
+	padding: 3px 10px 0 0;
+	text-align: start;
+	direction: rtl;
+}
+
+.bgimg {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 5 auto;
+	max-height: 400px;
+	/*height: 50%;*/
+	/* Strictly forbid any kind of animation */
+	transition: none;
+	animation: none;
+}
+
+.imgcontainer {
+	position: relative;
+}
+
+.mask {
+	left: 50%;
+	transform: translateX(-50%);
+}
+#infopanel .custom-control {
+	float: left;
+	margin: 10px 0 0 10px;
+}
+
+.accordionjs .acc_section .acc_head{
+	padding: 0 10px;
+}
+
+input[type=submit]{
+    background-color: #b9f6ca;        
+    padding: 10px 20px;
+}
