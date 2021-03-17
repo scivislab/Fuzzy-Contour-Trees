@@ -625,7 +625,9 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
             }
 
             var saddlesDrawn = new Array(saddleXvalues.length).fill(0); //makes sure that there max 2 edges drawn per saddle (min and max might not be unique)
-            var createBeak = true;
+            
+
+            console.log('saddlemaxisos[0]: ', saddlemaxisos[0])
 
             for (let l = 0; l < leaves.length; l++) {
                 var bundled_edge_firstpart = null;
@@ -634,6 +636,16 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                 var grouped_edge_secondpart = null;
                 var tn1 = saddles[l];
                 var tn2 = leaves[l];
+                var createBeak = true;
+
+
+                // test for maxedge
+                var print = false
+                if (tn1.scalar == saddlemaxisos[0]) {
+                    console.log('tn1.scalar: ', tn1.scalar);
+                    print = true;
+                }
+                
 
                 //let parentbranch = parentbranches[l];
                 //get opacity in the leaf node 
@@ -684,7 +696,8 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                             grouped_edge_secondpart = [[bundle_meet_point[0], tn1.y], [tn2.x + crnrad, tn1.y], [tn2.x, tn1.y + crnrad], [tn2.x, tn2.y]];
                         }
                     }
-                } else {
+                }
+                else {
                     if (saddleYmean > tn2.y) {
                         if (tn1) {
                             if (bundle_meet_point[0] > an2.x - crnrad)
@@ -708,10 +721,13 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                 }
 
                 if (tn2 && bundled_edge_firstpart !== null) {
+
                     if (branches[b].mode == "up")
                         bundled_edge_secondpart.push([an2.x, leafmaxy]);
                     else
                         bundled_edge_secondpart.push([an2.x, leafminy]);
+
+                    createBeak = (saddleXvalues.length == 1);
                     let increasing = false;
                     if (bundled_edge_firstpart[0][0] < bundled_edge_firstpart[bundled_edge_firstpart.length - 1][0])
                         increasing = true;
@@ -738,7 +754,9 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                     gGrouped_edges.push(grouped_edge_firstpart);
                     gGrouped_edges.push(grouped_edge_secondpart);
 
+
                     if (saddleXvalues.length == 1) {
+                            
                         if (saddlesDrawn[0] < 2 && (tn1.scalar == saddlemaxisos[0] || tn1.scalar == saddleminisos[0])) {
                             gBundled_edge_opacities.push(branch_opacity);
                             saddlesDrawn[0] += 1;
@@ -746,8 +764,9 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                         else //between edges are not shown
                             gBundled_edge_opacities.push(0);
 
-                        if (tn1.scalar == saddlemaxisos[0]) //needed for beaks which are only drawn if non-varying saddles
-                            maxedge = bundled_edge_firstpart.slice();
+                        if (tn1.scalar == saddlemaxisos[0]) { //needed for beaks which are only drawn if non-varying saddles
+                             maxedge = bundled_edge_firstpart.slice();
+                        }
                         if (tn1.scalar == saddleminisos[0])
                             minedge = bundled_edge_firstpart.slice();
                     } else {
