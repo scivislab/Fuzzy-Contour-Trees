@@ -16,7 +16,7 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
     var topmargin = 100;
 
     var svgwidth = parseFloat(svg.style("width"));
-    var svgheight = parseFloat(svg.style("height")) - topmargin;// - 200;
+    var svgheight = parseFloat(svg.style("height")) - topmargin;
     var gEdge_node_info = {};
     var gBundled_edges = [];
     var gEdgeids = [];
@@ -380,7 +380,11 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
             miniso = alignment.nodes[n].scalar;
         if (maxiso < alignment.nodes[n].scalar)
             maxiso = alignment.nodes[n].scalar;
-    }
+        }
+
+    miniso = gAminscalar;
+    maxiso = gAmaxscalar;
+
 
     /*miniso = branches[0].isorange[0];
     maxiso = branches[0].isorange[1];
@@ -627,7 +631,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
             var saddlesDrawn = new Array(saddleXvalues.length).fill(0); //makes sure that there max 2 edges drawn per saddle (min and max might not be unique)
             
 
-            console.log('saddlemaxisos[0]: ', saddlemaxisos[0])
 
             for (let l = 0; l < leaves.length; l++) {
                 var bundled_edge_firstpart = null;
@@ -642,7 +645,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                 // test for maxedge
                 var print = false
                 if (tn1.scalar == saddlemaxisos[0]) {
-                    console.log('tn1.scalar: ', tn1.scalar);
                     print = true;
                 }
                 
@@ -775,8 +777,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                         while (c < saddleXvalues.length && tn1.x != saddleXvalues[c])
                             c++;
                         if (c == saddleXvalues.length) {
-                            console.log("saddleXvalues: ");
-                            console.log(saddleXvalues);
                             throw new Error("could not find saddle x value " + tn1.x + " in saddleXvalues");
                         }
                         if (saddlesDrawn[c] < 2 && (tn1.scalar == saddlemaxisos[c] || tn1.scalar == saddleminisos[c])) {
@@ -1095,7 +1095,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
         d3.selectAll(".node").filter(function () { return gSelectedNodes.indexOf(this.id) == -1; })
             .classed("downlight", true);
         let wholeid = d3.select(this).attr("id");
-        console.log(wholeid)
         let splitid = wholeid.split('_');
         //let saddlenr = null;
         let id = wholeid;
@@ -1189,13 +1188,11 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
         let ids = null;
         if (id.startsWith("tree_text_")) {
             ids = d3.select("#tree_rect_" + id.substr(10)).attr("class").split(" ");
-            console.log(ids)
             d3.select("#tree_rect_" + id.substr(10)).classed("tree_rect_selected", true);
             t = id.substr(10) - 1;
         } else {
             ids = d3.select(this).attr("class").split(" ");
             d3.select(this).classed("tree_rect_selected", true);
-            console.log(ids)
         }
 
         //downlight all (also selected) branches
@@ -1294,9 +1291,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
                                 saddleedge = [];
                                 snodes.push(gEdge_node_info[eid][t][0]);
 
-                                console.log("longedge:", longedge)
-                                console.log("saddleedge:", saddleedge)
-
                                 test1 = longedge[0];
                                 test2 = longedge[1];
 
@@ -1330,7 +1324,6 @@ function draw(branches, trees, alignment, gAmaxscalar, gAminscalar, freq_w, pers
             }            
         }
 
-        console.log("len snodes: ", snodes.length)
 
 
         /*svg.append("line")
