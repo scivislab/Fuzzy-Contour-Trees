@@ -12,5 +12,5 @@ The tool is implemented as a **Jupyter Notebook**, which also uses a **ParaView/
     - *docker pull chgarth/paraview-notebook-ttk*
 4. Run the docker container:
     - *docker run -it --rm -p 8888:8888 -v "<path to 'fct-rollout' directory>:/home/" chgarth/paraview-notebook-ttk:latest jupyter notebook --allow-root*
-5. Open the indicated URL in your browser, open the *home* directoy and open the Jupyter Notebook file. 
+5. Open the indicated URL in your browser, go to the *home* directoy and open the Jupyter Notebook file. 
 6. Run all cells to see an example Fuzzy Contour Tree.
